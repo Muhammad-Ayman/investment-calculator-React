@@ -26,7 +26,7 @@ function App() {
     setInvestment((prevInvestment) => {
       const updatedInvestment = {
         ...prevInvestment,
-        [name]: value,
+        [name]: +value,
       };
       setResult(calculateInvestmentResults(updatedInvestment)); // Call clac with the new state
       return updatedInvestment;

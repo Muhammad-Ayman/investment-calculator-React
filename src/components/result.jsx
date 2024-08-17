@@ -1,3 +1,4 @@
+import { formatter } from "../util/investment";
 const Result = ({ result }) => {
   return (
     <table id="result">
@@ -13,10 +14,10 @@ const Result = ({ result }) => {
         {result.map((item) => (
           <>
             <tr>
-              <td>{item.year}</td>
-              <td>{item.investmentValue}</td>
-              <td>{item.interest}</td>
-              <td>{item.annualInvestment}</td>
+              <td>{formatter.format(item.year)}</td>
+              <td>{formatter.format(item.valueEndOfYear)}</td>
+              <td>{formatter.format(item.interest)}</td>
+              <td>{formatter.format(item.annualInvestment)}</td>
             </tr>
           </>
         ))}
