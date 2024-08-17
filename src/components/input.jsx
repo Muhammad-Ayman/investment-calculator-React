@@ -1,26 +1,7 @@
 import { useState } from "react";
 import { calculateInvestmentResults } from "../util/investment";
 
-const Inputs = ({ clac }) => {
-  const [investment, setInvestment] = useState({
-    initialInvestment: "",
-    annualInvestment: "",
-    expectedReturn: "",
-    duration: "",
-  });
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    setInvestment((prevInvestment) => {
-      const updatedInvestment = {
-        ...prevInvestment,
-        [name]: value,
-      };
-      clac(updatedInvestment); // Call clac with the new state
-      return updatedInvestment;
-    });
-  };
-
+const Inputs = ({ handleInputChange, investment }) => {
   return (
     <div id="user-input">
       <div className="input-group">

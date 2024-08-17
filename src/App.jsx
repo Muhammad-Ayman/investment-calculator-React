@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Header from "./components/header.jsx";
 import Inputs from "./components/input.jsx";
 import Result from "./components/result.jsx";
@@ -11,18 +12,32 @@ const areAllValuesNonNull = (obj) => {
 };
 
 function App() {
+  const [result, setResult] = useState([]);
+
+  const [investment, setInvestment] = useState({
+    initialInvestment: "",
+    annualInvestment: "",
+    expectedReturn: "",
+    duration: "",
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setInvestment((prevInvestment) => {
+      const updatedInvestment = {
+        ...prevInvestment,
+        [name]: value,
+      };
+      setResult(calculateInvestmentResults(updatedInvestment)); // Call clac with the new state
+      return updatedInvestment;
+    });
+  };
+
   return (
     <>
       <Header />
-      <Inputs
-        clac={(obj) => {
-          if (areAllValuesNonNull(obj)) {
-            console.log(calculateInvestmentResults(obj));
-          }
-        }}
-      />
-
-      <Result />
+      <Inputs handleInputChange={handleInputChange} investment={investment} />
+      <Result result={result} />
     </>
   );
 }
